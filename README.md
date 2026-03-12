@@ -8,17 +8,17 @@
 ## About
 
 This repository provides a simple "hello world" application example for
-[REANA](http://www.reanahub.io/) reusable research data analysis plaftorm. The example
-generates greetings for persons specified in an input file.
+[REANA](http://www.reanahub.io/) reusable research data analysis plaftorm.
+The example generates greetings for persons specified in an input file.
 
 ## Analysis structure
 
-Making a research data analysis reproducible basically means to provide "runnable
-recipes" addressing (1) where is the input data, (2) what software was used to analyse
-the data, (3) which computing environments were used to run the software and (4) which
-computational workflow steps were taken to run the analysis. This will permit to
-instantiate the analysis on the computational cloud and run the analysis to obtain (5)
-output results.
+Making a research data analysis reproducible basically means to provide
+"runnable recipes" addressing (1) where is the input data, (2) what software
+was used to analyse the data, (3) which computing environments were used to
+run the software and (4) which computational workflow steps were taken to run
+the analysis. This will permit to instantiate the analysis on the
+computational cloud and run the analysis to obtain (5) output results.
 
 ### 1. Input dataset
 
@@ -36,8 +36,8 @@ A simple "hello world" Python code for illustration:
 
 - [helloworld.py](code/helloworld.py)
 
-The program takes an input file with the names of the persons to greet and an optional
-sleeptime period and produces an output file with the greetings:
+The program takes an input file with the names of the persons to greet and
+an optional sleeptime period and produces an output file with the greetings:
 
 ```console
 $ python code/helloworld.py \
@@ -51,10 +51,11 @@ Hello Joe Bloggs!
 
 ### 3. Compute environment
 
-In order to be able to rerun the analysis even several years in the future, we need to
-"encapsulate the current compute environment", for example to freeze the Jupyter notebook
-version and the notebook kernel that our analysis was using. We shall achieve this by
-preparing a [Docker](https://www.docker.com/) container image for our analysis steps.
+In order to be able to rerun the analysis even several years in the future,
+we need to "encapsulate the current compute environment", for example to
+freeze the Jupyter notebook version and the notebook kernel that our analysis
+was using. We shall achieve this by preparing a
+[Docker](https://www.docker.com/) container image for our analysis steps.
 
 For example:
 
@@ -63,14 +64,15 @@ $ cat environments/python/Dockerfile
 FROM docker.io/library/python:2.7-slim
 ```
 
-Since we don't need any additional Python packages for this simple example to work, we
-can directly rely on the `python` image from the Docker Hub. The trailing `:2.7-slim`
-makes sure we are using the Python 2.7 slim image version.
+Since we don't need any additional Python packages for this simple example
+to work, we can directly rely on the `python` image from the Docker Hub.
+The trailing `:2.7-slim` makes sure we are using the Python 2.7 slim image
+version.
 
 ### 4. Analysis workflow
 
-This analysis is very simple because it consists basically of running only the Python
-executable which will produce a text file.
+This analysis is very simple because it consists basically of running only
+the Python executable which will produce a text file.
 
 The workflow can be represented as follows:
 
@@ -90,8 +92,8 @@ The workflow can be represented as follows:
 ```
 
 Note that you can also use [CWL](http://www.commonwl.org/v1.0/),
-[Yadage](https://github.com/diana-hep/yadage) or [Snakemake](https://snakemake.github.io)
-workflow specifications:
+[Yadage](https://github.com/diana-hep/yadage) or
+[Snakemake](https://snakemake.github.io) workflow specifications:
 
 - [Yadage workflow definition](workflow/yadage/workflow.yaml)
 - [CWL workflow definition](workflow/cwl/helloworld.cwl)
@@ -109,14 +111,15 @@ Hello Joe Bloggs!
 
 ## Running the above example on REANA
 
-We are now ready to run this example and on the [REANA](http://www.reana.io/) platform.
+We are now ready to run this example and on the
+[REANA](http://www.reana.io/) platform.
 
 There are two ways to execute this analysis example on REANA.
 
-If you would like to simply launch this analysis example on the REANA instance at CERN
-and inspect its results using the web interface, please click on one of the following
-badges, depending on which workflow system (CWL, Serial, Snakemake, Yadage) you would
-like to use:
+If you would like to simply launch this analysis example on the REANA
+instance at CERN and inspect its results using the web interface, please
+click on one of the following badges, depending on which workflow system
+(CWL, Serial, Snakemake, Yadage) you would like to use:
 
 [![Launch with CWL on REANA@CERN badge](https://www.reana.io/static/img/badges/launch-with-cwl-on-reana-at-cern.svg)](https://reana.cern.ch/launch?url=https%3A%2F%2Fgithub.com%2Freanahub%2Freana-demo-helloworld&specification=reana-cwl.yaml&name=reana-demo-helloworld-cwl)
 
@@ -126,14 +129,14 @@ like to use:
 
 [![Launch with Yadage on REANA@CERN badge](https://www.reana.io/static/img/badges/launch-with-yadage-on-reana-at-cern.svg)](https://reana.cern.ch/launch?url=https%3A%2F%2Fgithub.com%2Freanahub%2Freana-demo-helloworld&specification=reana-yadage.yaml&name=reana-demo-helloworld-yadage)
 
-If you would like a step-by-step guide on how to use the REANA command-line client to
-launch this analysis example, please read on.
+If you would like a step-by-step guide on how to use the REANA
+command-line client to launch this analysis example, please read on.
 
 ### Prepare files
 
-First we need to create a [reana.yaml](reana.yaml) file describing the structure of our
-analysis with its inputs, the code, the runtime environment, the computational workflow
-steps and the expected outputs:
+First we need to create a [reana.yaml](reana.yaml) file describing the
+structure of our analysis with its inputs, the code, the runtime
+environment, the computational workflow steps and the expected outputs:
 
 ```yaml
 version: 0.3.0
@@ -195,5 +198,6 @@ $ # download output results
 $ reana-client download results/greetings.txt
 ```
 
-Please see the [REANA-Client](https://reana-client.readthedocs.io/) documentation for
-more detailed explanation of typical `reana-client` usage scenarios.
+Please see the [REANA-Client](https://reana-client.readthedocs.io/)
+documentation for more detailed explanation of typical `reana-client` usage
+scenarios.
