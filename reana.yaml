@@ -12,15 +12,13 @@ workflow:
   type: serial
   specification:
     steps:
-      - environment: 'docker.io/library/python:2.7-slim'
+      - environment: "docker.io/library/python:2.7-slim"
         commands:
-          - python "${helloworld}"
-              --inputfile "${inputfile}"
-              --outputfile "${outputfile}"
-              --sleeptime ${sleeptime}
+          - python "${helloworld}" --inputfile "${inputfile}" --outputfile
+            "${outputfile}" --sleeptime ${sleeptime}
 outputs:
   files:
-   - results/greetings.txt
+    - results/greetings.txt
 tests:
   files:
     - tests/serial/log-messages.feature
