@@ -16,24 +16,26 @@ stages:
   - name: helloworld
     dependencies: [init]
     scheduler:
-      scheduler_type: 'singlestep-stage'
+      scheduler_type: "singlestep-stage"
       parameters:
-        sleeptime: {step: init, output: sleeptime}
-        inputfile: {step: init, output: inputfile}
-        helloworld: {step: init, output: helloworld}
-        outputfile: '{workdir}/greetings.txt'
+        sleeptime: { step: init, output: sleeptime }
+        inputfile: { step: init, output: inputfile }
+        helloworld: { step: init, output: helloworld }
+        outputfile: "{workdir}/greetings.txt"
       step:
         process:
-          process_type: 'string-interpolated-cmd'
-          cmd: 'python "{helloworld}" --sleeptime {sleeptime} --inputfile "{inputfile}" --outputfile "{outputfile}"'
+          process_type: "string-interpolated-cmd"
+          cmd:
+            'python "{helloworld}" --sleeptime {sleeptime} --inputfile
+            "{inputfile}" --outputfile "{outputfile}"'
         publisher:
-          publisher_type: 'frompar-pub'
+          publisher_type: "frompar-pub"
           outputmap:
             outputfile: outputfile
         environment:
-          environment_type: 'docker-encapsulated'
-          image: 'docker.io/library/python'
-          imagetag: '2.7-slim'
+          environment_type: "docker-encapsulated"
+          image: "docker.io/library/python"
+          imagetag: "2.7-slim"
           resources:
             - compute_backend: htcondorcern
             - htcondor_max_runtime: espresso

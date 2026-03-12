@@ -12,7 +12,7 @@ workflow:
   file: workflow/snakemake/Snakefile
 outputs:
   files:
-  - results/greetings.txt
+    - results/greetings.txt
 tests:
   files:
     - tests/snakemake/log-messages.feature

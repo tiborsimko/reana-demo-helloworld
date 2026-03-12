@@ -10,4 +10,4 @@ workflow:
   file: workflow/cwl/helloworld-htcondorcern.cwl
 outputs:
   files:
-   - results/greetings.txt
+    - results/greetings.txt
